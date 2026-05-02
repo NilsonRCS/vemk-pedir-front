@@ -1,21 +1,17 @@
 import http from './http'
-import type { Pedido } from '../models/Pedido'
+import type { Pedido, NovoPedido } from '../models/Pedido'
 
 export async function listarPedidos(): Promise<Pedido[]> {
   const { data } = await http.get<Pedido[]>('/pedidos')
   return data
 }
 
-export async function criarPedido(pedido: Omit<Pedido, 'id'>): Promise<Pedido> {
-  const { data } = await http.post<Pedido>('/pedidos', pedido)
+export async function buscarPedido(id: number): Promise<Pedido> {
+  const { data } = await http.get<Pedido>(`/pedido/${id}`)
   return data
 }
 
-export async function atualizarPedido(id: number, pedido: Partial<Pedido>): Promise<Pedido> {
-  const { data } = await http.put<Pedido>(`/pedidos/${id}`, pedido)
+export async function criarPedido(pedido: NovoPedido): Promise<Pedido> {
+  const { data } = await http.post<Pedido>('/pedido', pedido)
   return data
-}
-
-export async function deletarPedido(id: number): Promise<void> {
-  await http.delete(`/pedidos/${id}`)
 }

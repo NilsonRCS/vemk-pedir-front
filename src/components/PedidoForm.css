@@ -1,12 +1,40 @@
 .pedido-form {
   display: flex;
+  flex-direction: column;
   gap: 12px;
-  flex-wrap: wrap;
   padding: 20px 24px;
   background: var(--accent-bg);
   border: 1px solid var(--accent-border);
   border-radius: 12px;
   margin-bottom: 32px;
+  box-sizing: border-box;
+}
+
+.pedido-form__row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.pedido-form__label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-h);
+  flex: 1;
+  min-width: 160px;
+}
+
+.pedido-form__label:first-child {
+  flex: 1 1 100%;
+  min-width: unset;
+}
+
+.pedido-form__required {
+  color: var(--accent);
 }
 
 .pedido-form__input {
@@ -76,6 +104,14 @@
 .pedido-form__input--warning {
   border-color: var(--warning-border);
   box-shadow: 0 0 0 3px var(--warning-bg);
+}
+
+.pedido-form__textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
 }
 
 .pedido-form__hint {

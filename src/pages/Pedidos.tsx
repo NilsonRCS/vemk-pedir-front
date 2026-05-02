@@ -4,7 +4,7 @@ import { PedidoForm } from '../components/PedidoForm'
 import { PedidoList } from '../components/PedidoList'
 
 export function Pedidos() {
-  const { pedidos, loading, error, adicionar, remover } = usePedidos()
+  const { pedidos, loading, error, adicionar } = usePedidos()
 
   return (
     <main className="pedidos">
@@ -12,7 +12,7 @@ export function Pedidos() {
       <PedidoForm onSubmit={adicionar} />
       {loading && <p className="pedidos__status">Carregando...</p>}
       {error && <p className="pedidos__status pedidos__status--error">{error}</p>}
-      <PedidoList pedidos={pedidos} onRemover={remover} />
+      <PedidoList pedidos={pedidos} />
     </main>
   )
 }

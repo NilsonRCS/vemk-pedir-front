@@ -1,6 +1,18 @@
 import { useEffect, useState } from 'react'
-import { listarPedidos, criarPedido, deletarPedido } from '../api/pedidos'
-import type { Pedido } from '../models/Pedido'
+import axios from 'axios'
+import { listarPedidos, criarPedido } from '../api/pedidos'
+import type { Pedido, NovoPedido } from '../models/Pedido'
+
+function mensagemErro(err: unknown): string {
+  if (axios.isAxiosError(err)) {
+    const status = err.response?.status
+    const msg = err.response?.data
+    if (status === 400) return typeof msg === 'string' ? msg : 'Dados inválidos. Verifique o pedido.'
+    if (status === 401) return 'Não autorizado. Verifique as credenciais.'
+    if (status === 500) return 'Erro no servidor. Tente novamente em instantes.'
+  }
+  return 'Erro inesperado.'
+}
 
 export function usePedidos() {
   const [pedidos, setPedidos] = useState<Pedido[]>([])
@@ -13,28 +25,21 @@ export function usePedidos() {
     try {
       const data = await listarPedidos()
       setPedidos(data)
-    } catch {
-      setError('Falha ao carregar pedidos.')
+    } catch (err) {
+      setError(mensagemErro(err))
     } finally {
       setLoading(false)
     }
   }
 
-  async function adicionar(pedido: Omit<Pedido, 'id'>) {
+  async function adicionar(pedido: NovoPedido) {
+    setError(null)
     try {
       const novo = await criarPedido(pedido)
       setPedidos((prev) => [...prev, novo])
-    } catch {
-      setError('Falha ao criar pedido.')
-    }
-  }
-
-  async function remover(id: number) {
-    try {
-      await deletarPedido(id)
-      setPedidos((prev) => prev.filter((p) => p.id !== id))
-    } catch {
-      setError('Falha ao remover pedido.')
+    } catch (err) {
+      setError(mensagemErro(err))
+      throw err
     }
   }
 
@@ -42,5 +47,5 @@ export function usePedidos() {
     carregar()
   }, [])
 
-  return { pedidos, loading, error, adicionar, remover, recarregar: carregar }
+  return { pedidos, loading, error, adicionar, recarregar: carregar }
 }

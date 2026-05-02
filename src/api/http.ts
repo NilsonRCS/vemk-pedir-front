@@ -11,6 +11,9 @@ const http = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  auth: import.meta.env.VITE_API_USER
+    ? { username: import.meta.env.VITE_API_USER, password: import.meta.env.VITE_API_PASSWORD ?? '' }
+    : undefined,
 })
 
 export default http
