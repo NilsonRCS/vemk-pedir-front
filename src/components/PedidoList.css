@@ -1,0 +1,83 @@
+.pedido-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pedido-list__empty {
+  text-align: center;
+  color: var(--text);
+  font-size: 14px;
+  padding: 40px 0;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+}
+
+.pedido-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.pedido-list__item:hover {
+  border-color: var(--accent-border);
+  box-shadow: 0 2px 12px var(--accent-bg);
+}
+
+.pedido-list__info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.pedido-list__desc {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.pedido-list__qty {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.pedido-list__badge {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--accent-border);
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.pedido-list__remove {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #ef4444;
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pedido-list__remove:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: #ef4444;
+}

@@ -1,0 +1,41 @@
+.pedidos {
+  flex: 1;
+  padding: 40px 24px;
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.pedidos__title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-h);
+  margin: 0 0 32px;
+}
+
+.pedidos__title span {
+  color: var(--accent);
+}
+
+.pedidos__status {
+  font-size: 14px;
+  color: var(--text);
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.pedidos__status--error {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.06);
+}
+
+.pedidos__status--warning {
+  color: var(--warning);
+  border-color: var(--warning-border);
+  background: var(--warning-bg);
+}

@@ -1,0 +1,89 @@
+.pedido-form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 20px 24px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 12px;
+  margin-bottom: 32px;
+}
+
+.pedido-form__input {
+  flex: 1;
+  min-width: 180px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text-h);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.pedido-form__input:focus {
+  border-color: var(--accent-border);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.pedido-form__input--qty {
+  flex: 0 0 90px;
+  min-width: unset;
+}
+
+/* remove setas do input number */
+.pedido-form__input--qty::-webkit-outer-spin-button,
+.pedido-form__input--qty::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.pedido-form__input--qty {
+  -moz-appearance: textfield;
+}
+
+.pedido-form__btn {
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.pedido-form__btn:hover {
+  opacity: 0.88;
+}
+
+.pedido-form__btn:active {
+  transform: scale(0.97);
+}
+
+.pedido-form__btn--invalid,
+.pedido-form__btn:disabled {
+  background: #ef4444;
+  opacity: 1;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pedido-form__input--warning {
+  border-color: var(--warning-border);
+  box-shadow: 0 0 0 3px var(--warning-bg);
+}
+
+.pedido-form__hint {
+  width: 100%;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: var(--warning);
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-border);
+}
