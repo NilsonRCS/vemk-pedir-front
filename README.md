@@ -1,75 +1,82 @@
-# React + TypeScript + Vite
+# vemk-pedir-front
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interface web simples para registro e visualização de pedidos, feita para consumir um backend externo via API REST. O frontend não possui lógica de negócio própria — ele apenas envia e exibe os dados processados pelo serviço externo.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Fluxo de IA
 
-## React Compiler
+  Para o frontend, foi usado o mesmo Copilot em maior parte Sonnet 4.6. Decidi dividir o projeto em 2 repositórios, back e front, é um uso comum meu. Acredito que poderia ter sido um monolito, mas, por padrão, acabei separando.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+  Construi manualmente a base para deixar as pastas como eu queria. Depois comecei a usar a IA no desenvolvimento, como foi uma page muito simples, pedi, dando a IA uma ideia do que queria:
 
-Note: This will impact Vite dev & build performances.
+  exp: essa pagina precisa de um Header que ocupe 25% de altura do espaço disponível. Preciso que seja responsivo e use as cores que já existem no arquivo index.css.
 
-## Expanding the ESLint configuration
+  exp: o header não está responsivo o suficiente em telas 1920×1080, vamos usar o 25vh.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+  e por assim em diante fui conferindo os itens construídos e alinhando para o que eu queria visualmente.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tecnologias
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React 19 + TypeScript
+- Vite
+- Axios
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Pré-requisitos
+
+- Node.js 18+
+- Um backend externo rodando e acessível (padrão: `http://localhost:8080`)
+- Você pode utilizar o projeto que fiz em Java17, spring nesse rep:  https://github.com/NilsonRCS/vemk-pedir-api
+
+## Configuração
+
+Crie um arquivo `.env` na raiz do projeto com as variáveis necessárias:
+
+```env
+# URL base da API externa (obrigatório em produção)
+VITE_API_URL=http://localhost:8080
+
+# Autenticação Basic (opcional)
+VITE_API_USER=usuario
+VITE_API_PASSWORD=senha
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Se `VITE_API_URL` não for definido em desenvolvimento, o projeto usa `http://localhost:8080` como padrão.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Endpoints esperados no backend
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Método | Rota          | Descrição                  |
+|--------|---------------|----------------------------|
+| GET    | `/pedidos`    | Lista todos os pedidos     |
+| GET    | `/pedido/:id` | Busca um pedido pelo ID    |
+| POST   | `/pedido`     | Cria um novo pedido        |
+
+## Como rodar
+
+### Desenvolvimento
+
+```bash
+npm install
+npm run dev
+```
+
+O projeto ficará disponível em `http://localhost:5173`.
+
+### Build de produção
+
+```bash
+npm run build
+```
+
+Os arquivos gerados estarão na pasta `dist/`.
+
+### Preview da build
+
+```bash
+npm run preview
+```
+
+## Lint
+
+```bash
+npm run lint
 ```
